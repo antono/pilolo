@@ -72,7 +72,6 @@ Vagrant.configure("2") do |config|
   # config.berkshelf.except = []
 
   config.vm.provision :shell, :inline => <<-SCRIPT
-    exit 0
     echo "deb http://ftp.by.debian.org/debian/ wheezy main contrib non-free" > /etc/apt/sources.list
     apt-get update
     apt-get purge --yes ruby1.8

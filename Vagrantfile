@@ -72,6 +72,10 @@ Vagrant.configure("2") do |config|
   # config.berkshelf.except = []
 
   config.vm.provision :shell, :inline => <<-SCRIPT
+    if [ -x /usr/local/bin/chef-solo ]
+    then
+      exit 0
+    fi
     echo "deb http://ftp.by.debian.org/debian/ wheezy main contrib non-free" > /etc/apt/sources.list
     apt-get update
     apt-get purge --yes ruby1.8
@@ -85,6 +89,16 @@ Vagrant.configure("2") do |config|
       :user => {
         :name => 'antono',
         :public_key  => 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6uLqzTx+e6hAGY2dQ0KQsmsRZhxZY5yZUW8EeJh+ziDraAJtFvrFQyJS62X2jGBqSLjbNrOHdG1PTJKvi+BsDGrjSDimYvIAO9YdBiVpBfObWsY0Eiv+2mhneW+8uNShj8MIEkl2/bZmt41TU7j0+YmtFlufq8be3WN/CG3FV+36z5FTQqtVLPrnHWNwGLbNqXQVdwhOAjV2siWSBB+OV74j/KHhbMDw0vUG/wRvfGP1ivIPCzBBxx8gviP7hPPd05LPPXVyn2wVxcMAuAOPNzXyieTl72se7yIZejqqoKibvsEZW+90CfRPSsxjCtPz8fiN/SuoGlirQ6Gq7DQZcQ== antono@libero'
+      },
+      :chat => {
+        :jabber => true,
+        :ircproxy => false
+      },
+      :mail => {
+        :smtp => true,
+        :imap => true,
+        :pop3 => false,
+        :spamfilter => true
       }
     }
 
